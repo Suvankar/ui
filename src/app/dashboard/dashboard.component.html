@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12 m-b-10">
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+      <input [disabled]="disableInput" [(ngModel)]="inputText" type="text" nz-input placeholder="Search By Document ID" (keydown)="searchText($event)" />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+  </div>
+
+
+  <div class="col-md-6 col-lg-6">
+    <nz-card nzHoverable *ngIf="fileCount">
+      <div class="media align-items-center">
+        <nz-avatar [nzSize]="50" nzIcon="profile" class="ant-avatar-cyan" ></nz-avatar>
+        <div class="m-l-15">
+          <h2 class="m-b-0">{{fileCount.totalCount}}</h2>
+          <p class="m-b-0 text-muted">Total Processed Docs</p>
+        </div>
+      </div>
+    </nz-card>
+  </div>
+
+  <div class="col-md-6 col-lg-6">
+    <nz-card nzHoverable *ngIf="fileCount">
+      <div class="media align-items-center">
+        <nz-avatar [nzSize]="50" nzIcon="profile" class="ant-avatar-cyan" ></nz-avatar>
+        <div class="m-l-15">
+          <h2 class="m-b-0">{{fileCount.myCount}}</h2>
+          <p class="m-b-0 text-muted">Total My Docs</p>
+        </div>
+      </div>
+    </nz-card>
+  </div>
+
+</div>

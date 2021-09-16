@@ -1,0 +1,43 @@
+<div class="container">
+  <nz-card *ngFor="let item of blogs">
+    <nz-skeleton [nzLoading]="loading" [nzActive]="loading">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="font-size-80 m-t-25">
+            <i *ngIf="item.fileType == 'pdf'" [twoToneColor]="colorRed" nz-icon nzType="file-pdf" theme="twotone"></i>
+            <i *ngIf="item.fileType == 'doc'" [twoToneColor]="colorBlue" nz-icon nzType="file-word" theme="twotone"></i>
+            <i *ngIf="item.fileType == 'docx'" [twoToneColor]="colorBlue" nz-icon nzType="file-word" theme="twotone"></i>
+            <i *ngIf="item.fileType == 'ppt'" [twoToneColor]="colorVolcano" nz-icon nzType="file-ppt" theme="twotone"></i>
+            <i *ngIf="item.fileType == 'txt'" [twoToneColor]="colorPurple" nz-icon nzType="file-text" theme="twotone"></i>
+          </div>
+        </div>
+        <div class="col-md-10">
+          <h4 class="m-b-10">{{item.title}}</h4> <span *ngFor="let tag of item.tags"><nz-tag [nzColor]="'#108ee9'" >{{tag}}</nz-tag></span>
+          <div class="m-b-15">
+            <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center">
+                <nz-avatar nzSize="small" ></nz-avatar>
+                <div class="m-l-10">
+                  <span class="text-gray font-weight-semibold">{{item.authorName}}</span>
+                </div>
+              </div>
+              <div class="text-gray">
+                <nz-divider nzType="vertical"></nz-divider>
+                <span>{{item.date}}</span>
+              </div>
+            </div>
+          </div>
+          <p class="lh-1-8 m-b-20">
+            <span>{{item.desc}}</span>
+          </p>
+          <div class="text-right">
+            <a [routerLink]="['/pages/viewdocument/'+item.id]" class="font-weight-semibold" nz-button nzType="link">Read More</a>
+          </div>
+        </div>
+      </div>
+    </nz-skeleton>
+  </nz-card>
+  <div class="m-t-30 text-center">
+    <nz-pagination [nzPageIndex]="1" [nzTotal]="50"></nz-pagination>
+  </div>
+</div>

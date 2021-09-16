@@ -1,0 +1,165 @@
+<div class="row">
+  <div class="col-md-5 col-lg-5">
+    <nz-card style="border-left: 4px solid #014AAD; " [nzBodyStyle] = "{ padding : '0px', margin: '0px'}" >
+        <h6 class="m-t-5 m-l-10" style="display: flex ;justify-content: flex-start;">{{fileInformation.fileName}}</h6>
+      <nz-divider class="m-t-0 m-b-5"></nz-divider>
+      <p  class="m-l-10"style="display: flex ;justify-content: flex-start;">{{fileOtherDetails.uploadedBy}}  <nz-divider nzType="vertical" class="m-t-5" style="height: 1.5em; "></nz-divider> {{fileOtherDetails.uploadedById}}  <nz-divider nzType="vertical" class="m-t-5" style="height: 1.5em; "></nz-divider>
+        <nz-switch class="m-l-10 " style="display: flex ;justify-content: flex-end;" [ngModel]="true" nzCheckedChildren="PII" nzUnCheckedChildren="NON-PII" [nzDisabled]="fileOtherDetails.isPiData"></nz-switch>
+
+      </p>
+
+    </nz-card>
+    <nz-card>
+      <ngx-extended-pdf-viewer *ngIf="fileInformation.fileType === 'pdf'" [src]="fileInformation.fileDownloadUrl" useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
+    </nz-card>
+  </div>
+  <div class="col-md-4 col-lg-4">
+    <nz-card style="border-left: 4px solid #014AAD; " [nzBodyStyle] = "{ padding : '0px', margin: '0px'}" >
+      <span> <h6>Stats</h6>    <nz-progress [nzFormat]="formatOne"
+        nzType="circle"
+        [nzPercent]="90"
+        [nzSuccessPercent]="70" [nzWidth]="50"
+      ></nz-progress> &nbsp; &nbsp;
+      <nz-progress [nzFormat]="formatOne"
+                   nzType="circle"
+                   [nzPercent]="60"
+                   [nzSuccessPercent]="70" [nzWidth]="50"
+      ></nz-progress> &nbsp; &nbsp;
+         <nz-progress [nzFormat]="formatOne"
+                      nzType="circle"
+                      [nzPercent]="60"
+                      [nzSuccessPercent]="30" [nzWidth]="50"
+         ></nz-progress>
+      </span>
+
+    </nz-card>
+    <nz-card style="border-left: 4px solid #014AAD; " [nzBodyStyle] = "{ padding : '0px', margin: '0px'}" class="m-t-10">
+      Technology
+      <nz-progress class="m-l-10 m-r-5 " [nzPercent]="30" [nzSteps]="10" [nzShowInfo]="false" nzStrokeColor="#1890ff"></nz-progress >
+      WMT
+      <nz-progress class="m-l-10 m-r-5 " [nzPercent]="60" [nzSteps]="10" [nzShowInfo]="false" nzStrokeColor="#1890ff"></nz-progress >
+    </nz-card>
+    <nz-card style="border-left: 4px solid #014AAD; " [nzBodyStyle] = "{ padding : '0px', margin: '0px'}" class="m-t-10">
+      <h6>Custom Tags</h6>
+    </nz-card>
+    <nz-card [nzBodyStyle] = "{ padding : '0px', margin: '0px'}" >
+      <nz-tag [nzColor]="'#108ee9'" class="m-5">#108ee9</nz-tag>
+      <nz-tag [nzColor]="'#108ee9'" class="m-5">#108ee9</nz-tag>
+      <nz-tag [nzColor]="'#108ee9'" class="m-5">#108ee9</nz-tag>
+      <nz-tag [nzColor]="'#108ee9'" class="m-5">#108ee9</nz-tag>
+      <nz-tag [nzColor]="'#108ee9'" class="m-5">#108ee9</nz-tag>
+
+    </nz-card>
+  </div>
+  <div class="col-md-3 col-lg-3">
+    <nz-card style="border-left: 4px solid #014AAD; " [nzBodyStyle] = "{ padding : '0px', margin: '0px'}" >
+      <h6>Similar Documents</h6>
+    </nz-card>
+    <nz-card [nzBodyStyle] = "{ padding : '0px', margin: '0px'}" >
+      <div class="row">
+        <div class="col-md-4 col-lg-4">
+          <i nz-icon nzType="file-text" nzTheme="outline" class="font-size-40 m-t-5" style="color: #aeae04;display: flex; justify-content: flex-end" ></i>
+        </div>
+        <div class="col-md-8 col-lg-8" >
+          <h6 style="display: flex; justify-content: flex-start" class="m-t-0 m-b-0">abc.pdf</h6>
+          <p  style="display: flex; justify-content: flex-start; color: #1c00cf">80% Confidence</p>
+        </div>
+        <div class="col-md-4 col-lg-4">
+          <i nz-icon nzType="file-text" nzTheme="outline" class="font-size-40 m-t-5" style="color: #aeae04;display: flex; justify-content: flex-end"></i>
+        </div>
+        <div class="col-md-8 col-lg-8">
+          <h6 style="display: flex; justify-content: flex-start" class="m-t-0 m-b-0">abc.pdf</h6>
+          <p  style="display: flex; justify-content: flex-start; color: #1c00cf">70% Confidence</p>
+        </div>
+      </div>
+    </nz-card>
+
+    <nz-card class="m-t-10" style="border-left: 4px solid #014AAD; " [nzBodyStyle] = "{ padding : '0px', margin: '0px'}" >
+      <h6>Jive Documents</h6>
+    </nz-card>
+    <nz-card [nzBodyStyle] = "{ padding : '0px', margin: '0px'}" >
+      <div class="row">
+
+        <div class="col-md-12 col-lg-12 m-l-5" >
+          <h6 style="display: flex; justify-content: flex-start" class="m-t-0 m-b-0">http://jive.com/doc-1212</h6>
+          <p  style="display: flex; justify-content: flex-start; color: #1c00cf">80% Confidence</p>
+        </div>
+
+        <div class="col-md-12 col-lg-12 m-l-5">
+          <h6 style="display: flex; justify-content: flex-start" class="m-t-0 m-b-0">http://jive.com/doc-1212</h6>
+          <p  style="display: flex; justify-content: flex-start; color: #1c00cf">70% Confidence</p>
+        </div>
+      </div>
+    </nz-card>
+  </div>
+  <div class="col-md-12 col-lg-12">
+    <nz-card style="border-left: 4px solid #014AAD; " [nzBodyStyle] = "{ padding : '0px', margin: '0px'}" >
+      <h6 class="m-t-5 m-l-10" style="display: flex ;justify-content: flex-start;">Doc Summary</h6>
+      <nz-divider class="m-t-0 m-b-5"></nz-divider>
+      <p  class="m-l-10"style="display: flex ;justify-content: flex-start;" nz-paragraph>
+        Ant Design's design team preferred to design with the HSB color model, which makes it easier for designers
+        to have a clear psychological expectation of color when adjusting colors, as well as facilitate
+        communication in teams.
+      </p>
+
+    </nz-card>
+  </div>
+</div>
+
+
+
+<!--
+
+  <nz-layout style="background-color: white;">
+    <nz-header style="background-color: white;">
+      <h4 class="m-10">
+        <i *ngIf="type == 'pdf'" [twoToneColor]="colorRed" nz-icon nzType="file-pdf" theme="twotone"></i>
+        <i *ngIf="type == 'doc'" [twoToneColor]="colorBlue" nz-icon nzType="file-word" theme="twotone"></i>
+        <i *ngIf="type == 'docx'" [twoToneColor]="colorBlue" nz-icon nzType="file-word" theme="twotone"></i>
+        <i *ngIf="type == 'ppt'" [twoToneColor]="colorVolcano" nz-icon nzType="file-ppt" theme="twotone"></i>
+        <i *ngIf="type == 'txt'" [twoToneColor]="colorPurple" nz-icon nzType="file-text" theme="twotone"></i> &nbsp; {{file.name}}</h4>
+
+    </nz-header>
+    <nz-layout>
+      <nz-content style="background-color: white;">
+        <div class="m-15">
+          <nz-descriptions nzTitle="File Details"  nzBordered nzSize="small">
+            <nz-descriptions-item nzTitle="File Name"><b>{{file.name}}</b></nz-descriptions-item>
+            <nz-descriptions-item nzTitle="UID"><b>{{file.uid}}</b></nz-descriptions-item>
+            <nz-descriptions-item nzTitle="File Type"><b>{{type}}</b></nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Uploaded Time"><b>{{file.lastModifiedDate | date : 'short'}}</b></nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Uploaded By"><b>Suvankar Bose(83WNH)</b></nz-descriptions-item>
+            <nz-descriptions-item nzTitle="PII DATA"><b>{{isPIData}}</b></nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Custom Tags" [nzSpan]="3">
+              <nz-tag [nzColor]="'#108ee9'"
+                      *ngFor="let tag of tags; let i = index"
+                      [nzMode]="'default'">
+                {{ sliceTagName(tag) }}
+              </nz-tag>
+
+
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Auto Tags" [nzSpan]="3">
+              <nz-tag [nzColor]="'#108ee9'" >DOCKER</nz-tag>
+              <nz-tag [nzColor]="'#108ee9'" >PDF</nz-tag>
+              <nz-tag [nzColor]="'#108ee9'" >INFORMATION</nz-tag>
+              <nz-tag [nzColor]="'#108ee9'" >IT</nz-tag>
+              <nz-tag [nzColor]="'#108ee9'" >ARCHITECTURE</nz-tag>
+              <nz-tag [nzColor]="'#108ee9'" >WMT</nz-tag>
+              <nz-tag [nzColor]="'#108ee9'" >NON-PII</nz-tag>
+
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Summary" [nzSpan]="3" >
+              Docker is an open platform for developing, shipping, and running applications. Docker enables you to separat &nbsp; <a> Read More</a>
+            </nz-descriptions-item>
+          </nz-descriptions>
+
+      </div>
+
+
+
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+
+-->

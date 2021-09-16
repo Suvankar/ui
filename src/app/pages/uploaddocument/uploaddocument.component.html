@@ -1,0 +1,100 @@
+<div class="container">
+  <nz-card>
+    <nz-steps nzSize="small" [nzCurrent]="currentStep">
+      <nz-step nzTitle="Upload your File."  >
+      </nz-step>
+      <nz-step nzTitle="Tag your File."  ></nz-step>
+      <nz-step nzTitle="File Processing using AI." ></nz-step>
+      <nz-step nzTitle="Done" ></nz-step>
+    </nz-steps>
+    <nz-card *ngIf="currentStep === 0" [nzBordered]="false">
+      <nz-upload
+        nzType="drag"
+        [nzMultiple]="true"
+        nzAction="http://localhost:8888/upload"
+        (nzChange)="handleChange($event)"
+      >
+        <p class="ant-upload-drag-icon">
+          <i nz-icon nzType="inbox"></i>
+        </p>
+        <p class="ant-upload-text">Click or drag file to this area to upload</p>
+        <p class="ant-upload-hint">
+          Currently Support .pdf , .docx , .doc & .txt files. You can also upload image file with text contents.
+        </p>
+      </nz-upload>
+    </nz-card>
+    <nz-card *ngIf="currentStep === 1" [nzBordered]="false">
+      <nz-descriptions nzTitle="File Details" [nzExtra]="extraTpl" nzBordered nzSize="small">
+        <nz-descriptions-item nzTitle="File Name">{{file.name}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="UID">{{file.response.uid}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="File Type">{{file.type}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Uploaded Time">{{file.response.createdOn}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Uploaded By">Suvankar Bose(83WNH)</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="PII DATA">{{isPIData}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="CUSTOM TAGS">
+          <nz-tag [nzColor]="'#2db7f5'"
+            *ngFor="let tag of tags; let i = index"
+            [nzMode]="'closeable'"
+            (nzOnClose)="handleClose(tag)"
+          >
+            {{ sliceTagName(tag) }}
+          </nz-tag>
+          <nz-tag *ngIf="!inputVisible" class="editable-tag" nzNoAnimation (click)="showInput()">
+            <i nz-icon nzType="plus"></i>
+            New Tag
+          </nz-tag>
+          <input
+            #inputElement
+            nz-input
+            nzSize="small"
+            *ngIf="inputVisible"
+            type="text"
+            [(ngModel)]="inputValue"
+            style="width: 78px;"
+            (blur)="handleInputConfirm()"
+            (keydown.enter)="handleInputConfirm()"
+          />
+
+        </nz-descriptions-item>
+      </nz-descriptions>
+
+
+      <ng-template #extraTpl>
+        <nz-switch [(ngModel)]="isPIData"  nzCheckedChildren="PII" nzUnCheckedChildren="NON-PII"></nz-switch>
+      </ng-template>
+      <button class="m-t-25" nz-button nzType="primary" (click)="submitFile()" *ngIf="!isFileSubmitted" >SUBMIT</button>
+      <button class="m-t-25" nz-button nzType="primary"  *ngIf="isFileSubmitted"nzLoading [disabled]="true">SUBMIT</button>
+    </nz-card>
+
+    <nz-card *ngIf="currentStep === 2" [nzBordered]="false">
+      <div class="row">
+        <div class="col-md-8 col-lg-8">
+          <nz-timeline [nzPending]="currentStage" *ngIf="doneStages.length < documentSatges.length +1" class="m-t-45">
+            <nz-timeline-item [nzDot]="dotTemplate" *ngFor="let steps of doneStages; let i = index">{{steps}}</nz-timeline-item>
+          </nz-timeline>
+          <nz-timeline *ngIf="doneStages.length === documentSatges.length +1" class="m-t-45">
+            <nz-timeline-item [nzDot]="dotTemplate" *ngFor="let steps of doneStages; let i = index">{{steps}}</nz-timeline-item>
+          </nz-timeline>
+          <ng-template #dotTemplate>
+            <i nz-icon nzType="check-circle" style="font-size: 16px;" style="color: #0b8235"></i>
+
+          </ng-template>
+        </div>
+        <div class="col-md-4 col-lg-4" class="m-t-130"> <nz-progress [nzPercent]="percent" nzType="circle"></nz-progress></div>
+      </div>
+
+    </nz-card>
+
+    <nz-card *ngIf="currentStep === 3" [nzBordered]="false">
+      <nz-result
+        nzStatus="success"
+        [nzTitle]="'Successfully processed the file ' + file.name + '!'"
+        [nzSubTitle]="'File UID :' + file.response.uid + ' was successfully processed by our AI engine. Click on the below button to navigate to result .'"
+      >
+        <div nz-result-extra>
+          <button nz-button nzType="primary" (click)="routeToFileDetails()">View Details</button>
+        </div>
+      </nz-result>
+    </nz-card>
+  </nz-card>
+</div>
